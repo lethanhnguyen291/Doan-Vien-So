@@ -27,8 +27,7 @@ export function checkPosition(event, position, now=Date.now()) {
   }
   const distance = distanceMeters(event.latitude,event.longitude,position.latitude,position.longitude);
   const result = {distance:Math.round(distance),accuracy:Math.ceil(position.accuracy),radius:event.radius};
-  if (position.accuracy > Math.min(50,event.radius/2)) fail('GPS chưa đủ chính xác. Hãy ra nơi thoáng và thử lại.',422,result);
-  if (distance + position.accuracy > event.radius) fail('Bạn chưa được xác định nằm trong phạm vi sự kiện. Hãy di chuyển gần địa điểm hơn.',422,result);
+  if (distance > event.radius) fail('Bạn chưa được xác định nằm trong phạm vi sự kiện. Hãy di chuyển gần địa điểm hơn.',422,result);
   return result;
 }
 function publicEvent(event) {
@@ -37,9 +36,9 @@ function publicEvent(event) {
 }
 function checkToken(event,token,now=Date.now()) {
   if (!token || token !== event.token) fail('Mã QR đã đổi hoặc không hợp lệ. Hãy quét mã mới.',403);
-  if(event.closed) fail('Bí thư đã đóng điểm danh.',410);
+  if(event.closed) fail('Đoàn phường, xã đã đóng điểm danh.',410);
   if(now<event.starts_at) fail('Buổi điểm danh chưa đến giờ mở.',409);
-  if(now>event.ends_at || now>event.expires_at) fail('Mã QR đã hết hạn. Nhờ bí thư tạo mã mới.',410);
+  if(now>event.ends_at || now>event.expires_at) fail('Mã QR đã hết hạn. Nhờ cán bộ Đoàn phường, xã tạo mã mới.',410);
 }
 export default {
   async fetch(request,env) {
