@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0057B8">
+<meta name="description" content="Đoàn viên số Đồng Nai — Lịch sinh hoạt, điểm danh và quản lý chi đoàn. Bản trải nghiệm giao diện.">
+<title>Đoàn viên số · Đồng Nai</title>
+<link rel="stylesheet" href="giao-dien.css">
+</head>
+<body>
+<a class="skip-link" href="#screenBody">Đến nội dung chính</a>
+<div id="phoneFrame" class="app">
+<div class="offline-banner" id="offlineBanner" role="status"><span>Đang thử tình huống mất mạng. Điểm danh sẽ chờ xác nhận.</span><button onclick="toggleOffline()">Kết nối lại</button></div>
+<main id="screenBody" tabindex="-1"></main>
+<nav id="bottomNav" class="bottom-nav" aria-label="Điều hướng chính"></nav>
+</div>
+<div id="toastBox" class="toast" role="status" aria-live="polite"></div>
+<div id="modalOverlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+<section id="modalContent" class="modal-card" role="dialog" aria-modal="true" aria-label="Thông tin chi tiết"></section>
+</div>
+<div id="printReport"></div>
+<script src="ung-dung.js"></script>
+</body>
+</html>
